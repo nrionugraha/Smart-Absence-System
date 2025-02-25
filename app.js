@@ -82,10 +82,17 @@ async function updateAttendanceRecords() {
         const attendanceBody = document.getElementById("attendanceBody");
         attendanceBody.innerHTML = ""; // Clear existing records
 
+        // Get today's date
+        const today = new Date();
+        const todayString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+
         records.forEach(record => {
-            const row = document.createElement("tr");
-            row.innerHTML = `<td>${record.studentName}</td><td>${new Date(record.timestamp * 1000).toLocaleDateString()}</td><td>${new Date(record.timestamp * 1000).toLocaleTimeString()}</td>`;
-            attendanceBody.appendChild(row);
+            const recordDate = new Date(record.timestamp * 1000).toISOString().split('T')[0]; // Format: YYYY-MM-DD
+            if (recordDate === todayString) { // Check if the record date matches today's date
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${record.studentName}</td><td>${new Date(record.timestamp * 1000).toLocaleDateString()}</td><td>${new Date(record.timestamp * 1000).toLocaleTimeString()}</td>`;
+                attendanceBody.appendChild(row);
+            }
         });
     } catch (error) {
         console.error("Error fetching attendance records:", error);
