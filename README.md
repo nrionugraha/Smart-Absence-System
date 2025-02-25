@@ -67,7 +67,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 🚀 **Join us in revolutionizing attendance management with blockchain!**
 
-📧 Contact: your.email@example.com  
-🌎 GitHub: [Your GitHub Link]  
+📧 Contact: superpumpin@gmail.com  
+🌎 GitHub: [@nrionugraha  ](https://github.com/nrionugraha/)
 💡 Made for SMA Kolese Loyola 🎓
 
