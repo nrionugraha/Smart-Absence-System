@@ -27,6 +27,17 @@ body {
     padding: 20px;
 }
 
+.curved-input {
+  width: 200px;
+  padding: 10px 15px;
+  border: 2px solid #007BFF; /* Border color */
+  border-radius: 25px; /* Curved corners */
+  font-family: "SF Pro Text", BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  outline: none; /* Remove outline on focus */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
 .button-primary {
     background-color: #013299;
     color: white;

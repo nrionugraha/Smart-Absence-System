@@ -55,19 +55,86 @@ async function connectWallet() {
 
     await init();
 }
-
-async function registerStudent() {
-    const name = prompt("Enter your name:");
-    if (name) {
+document.getElementById("registerButton").onclick = function () {
+        document.getElementById("studentNameInput").style.display = "inline-block";
+        document.getElementById("submitRegisterButton").style.display = "inline-block";
+    };
+    
+    document.getElementById("submitRegisterButton").onclick = async function () {
+        const nameInput = document.getElementById("studentNameInput");
+        const name = nameInput.value.trim(); 
+    
+        if (!name) {
+            alert("Please enter a name before registering.");
+            return;
+        }
+    
         try {
-            await attendanceContract.registerStudent(name);
+            const tx = await attendanceContract.registerStudent(name);
+            await tx.wait(); 
+    
             alert("Student registered successfully!");
+            await displayStudentName(); 
+    
+            // Hide input and reset value after registration
+            nameInput.style.display = "none";
+            document.getElementById("submitRegisterButton").style.display = "none";
+            nameInput.value = "";
         } catch (error) {
             console.error("Error registering student:", error);
             alert("Failed to register student. Please check the console for details.");
         }
+    };
+    
+    async function displayStudentName() {
+        try {
+            const address = await signer.getAddress(); // Get the connected wallet address
+            console.log("Fetching student for address:", address);
+            
+            const student = await attendanceContract.students(address); // Fetch student data
+            
+            const studentNameElement = document.getElementById("studentName");
+    
+            if (student[2]) { // Check if registered (boolean at index 2)
+                studentNameElement.innerText = `Welcome, ${student[0]}`;
+            } else {
+                studentNameElement.innerText = "No student registered for this wallet.";
+            }
+        } catch (error) {
+            console.error("Error fetching student name:", error);
+            document.getElementById("studentName").innerText = "Error fetching student name.";
+        }
     }
-}
+document.getElementById("registerButton").onclick = function () {
+    document.getElementById("studentNameInput").style.display = "inline-block";
+    document.getElementById("submitRegisterButton").style.display = "inline-block";
+};
+
+document.getElementById("submitRegisterButton").onclick = async function () {
+    const nameInput = document.getElementById("studentNameInput");
+    const name = nameInput.value.trim(); 
+
+    if (!name) {
+        alert("Please enter a name before registering.");
+        return;
+    }
+
+    try {
+        const tx = await attendanceContract.registerStudent(name);
+        await tx.wait(); 
+
+        alert("Student registered successfully!");
+        await displayStudentName(); 
+
+        // Hide input and reset value after registration
+        nameInput.style.display = "none";
+        document.getElementById("submitRegisterButton").style.display = "none";
+        nameInput.value = "";
+    } catch (error) {
+        console.error("Error registering student:", error);
+        alert("Failed to register student. Please check the console for details.");
+    }
+};
 
 async function displayStudentName() {
     try {
@@ -79,7 +146,7 @@ async function displayStudentName() {
         const studentNameElement = document.getElementById("studentName");
 
         if (student[2]) { // Check if registered (boolean at index 2)
-            studentNameElement.innerText = `Registered Student: ${student[0]}`;
+            studentNameElement.innerText = `Welcome, ${student[0]}`;
         } else {
             studentNameElement.innerText = "No student registered for this wallet.";
         }
