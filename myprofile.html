@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AMDG - Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="main.html" class="nav-logo">AMDG</a>
+    </div>
+    <div class="nav-right">
+      <a href="myprofile.html" class="nav-link">Profile</a>
+      <button id="logoutButton" class="btn logout">Logout</button>
+      <!-- Dark mode toggle di navbar -->
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </header>
+  <main class="profile-container">
+    <section class="profile-card">
+      <h2 id="username">Username</h2>
+      <p id="walletAddress" class="wallet-address"></p>
+    </section>
+    <section id="myTweets" class="my-tweets">
+      <h3>My Tweets</h3>
+      <!-- Tweet pribadi beserta komentar dan jumlah komentar akan dimuat di sini -->
+    </section>
+    <section id="commentsSection" class="my-comments">
+      <div id="myComments"></div>
+      <p id="myCommentCount"></p>
+    </section>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+  <script src="myprofile.js"></script>
+  <script>
+    // Dark mode toggle handler untuk halaman profile
+    const toggle = document.getElementById('darkModeToggle');
+    toggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark', toggle.checked);
+      localStorage.setItem('darkMode', toggle.checked ? 'true' : 'false');
+    });
+    if (localStorage.getItem('darkMode') === 'true') {
+      toggle.checked = true;
+      document.body.classList.add('dark');
+    }
+  </script>
+</body>
+</html>
