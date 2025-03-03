@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAbsenceLoyola</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.0/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i0.wp.com/www.loyola-smg.sch.id/wp-content/uploads/2023/05/logoloyola2.png?resize=600%2C764&ssl=1" alt="SMA Kolese Loyola" class="logo">
+        <h1>Smart Absence Loyola</h1>
+        <button class="button-primary" id="connectWalletButton">Connect Wallet</button>
+        <button class="button-secondary" id="registerButton" style="display:none;">Register Student</button>
+        <input class="curved-input" type="text" id="studentNameInput" placeholder="Enter your name" style="display:none;">
+        <button class="button-secondary" id="submitRegisterButton" style="display:none;">Submit</button>
+        <button class="button-secondary" id="markAttendanceButton" style="display:none;">Mark Attendance</button>
+        <h3 id="studentName"></h3>
+        
+        <h2>Attendance Records</h2>
+        <div id="errorMessage" style="color: red; display: none;"></div> <!-- Error message section -->
+        <div id="loadingMessage" style="display: none;">Loading...</div> <!-- Loading indicator -->
+        <table class="table-container" id="attendanceTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="attendanceBody">
+                <!-- Attendance records will be populated here -->
+            </tbody>
+        </table>
+        <button class="button-primary" id="downloadButton" style="display:none;">Download Report</button>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
